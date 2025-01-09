@@ -35,7 +35,7 @@ public class AuthenticationService {
     }
 
     public User signup ( RegisterUserDto input ) {
-        User user = new User ( input.getUsername(), input.getEmail(), passwordEncoder.encode( input.getPassword()));
+        User user = new User ( input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()));
         user.setVerificationCode( generateVerificationCode());
         user.setVerificationCodeExpiresAt( LocalDateTime.now().plusMinutes( 15 ));
         user.setEnabled( false );
@@ -43,7 +43,7 @@ public class AuthenticationService {
         return userRepository.save( user );
     }
 
-    public User authenticate (LoginUserDto input ) {
+    public User authenticate ( LoginUserDto input ) {
         User user = userRepository.findByEmail( input.getEmail() )
                 .orElseThrow(() -> new RuntimeException( "User not found" ));
 

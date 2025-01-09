@@ -24,10 +24,10 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping( "/signup" )
-    public ResponseEntity<User> register ( @RequestBody RegisterUserDto registerUserDto ) {
-        User registerdUser = authenticationService.signup( registerUserDto );
-        return ResponseEntity.ok( registerdUser );
+    @PostMapping("/signup")
+    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+        User registeredUser = authenticationService.signup( registerUserDto );
+        return ResponseEntity.ok( registeredUser );
     }
 
     @PostMapping( "/login" )
