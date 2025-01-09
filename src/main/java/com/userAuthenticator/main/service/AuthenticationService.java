@@ -86,6 +86,7 @@ public class AuthenticationService {
 
     public void resendVerificationCode ( String email ) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
+
         if ( optionalUser.isPresent()) {
             User user = optionalUser.get();
             if ( user.isEnabled()) {
@@ -93,7 +94,8 @@ public class AuthenticationService {
             }
             user.setVerificationCode( generateVerificationCode());
             user.setVerificationCodeExpiresAt( LocalDateTime.now().plusMinutes( 30 ));
-            userRepository.save(user);
+            sendVerificationEmail( user );
+            userRepository.save( user );
         } else {
             throw new RuntimeException( "User not found" );
         }
